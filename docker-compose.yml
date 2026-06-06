@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build: ./fastapi_service
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      - PION_GRPC_URL=pion:50051
+    depends_on:
+      - pion
+    volumes:
+      - ./fastapi_service:/app
+    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  pion:
+    build: ./pion_service
+    ports:
+      - "50051:50051"    # gRPC
+      - "8080:8080"      # WebRTC signaling fallback (optional)
+      - "5000-5100:5000-5100/udp"  # RTP media
+    environment:
+      - PION_LOG_INFO=*
+
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend_test:/usr/share/nginx/html:ro
+    depends_on:
+      - fastapi

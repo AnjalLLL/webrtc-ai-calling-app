@@ -1,0 +1,30 @@
+# Documentation
+AI_VIDEO_CALL_MICROSERVICE.md
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.python-version
+
+# Go
+pion_service/pion_service
+pion_service/bin/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
