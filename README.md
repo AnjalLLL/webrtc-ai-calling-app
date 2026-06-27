@@ -70,3 +70,4 @@ docker-compose up --build
 The service implements a strict audio pipeline for Gemini compatibility:
 - Browser (Opus/RTP) → Pion (PCM 48kHz) → Resample (16kHz) → FastAPI → Gemini (PCM 16kHz)
 - Gemini (PCM 24kHz) → FastAPI → Pion → Resample (48kHz) → Opus/RTP → Browser
+- Need gemini api for test.
